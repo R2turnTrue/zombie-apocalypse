@@ -14,7 +14,7 @@ class DamageListener : Listener {
     fun damage(event: EntityDamageEvent) {
         if(event.entityType == EntityType.PLAYER && event.cause == EntityDamageEvent.DamageCause.FALL) {
             event.damage = 0.0
-            (event.entity as Player).addPotionEffect(PotionEffect(PotionEffectType.SLOW, 60, 1, false, false))
+            (event.entity as Player).addPotionEffect(PotionEffect(PotionEffectType.SLOW, 60, 5, false, false))
         }
     }
 
