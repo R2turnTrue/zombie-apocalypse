@@ -4,10 +4,11 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent
 
-class EventHandler : Listener {
+class EventListener : Listener {
 
     @EventHandler
-    fun onJoin(event: PlayerJoinEvent) {
+    fun join(event: PlayerJoinEvent) {
+        event.player.scoreboard = board!!
         zombieTeam?.addEntry(event.player.name)
     }
 
