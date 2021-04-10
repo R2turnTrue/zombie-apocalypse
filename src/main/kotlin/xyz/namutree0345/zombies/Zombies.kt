@@ -8,7 +8,6 @@ import org.bukkit.scoreboard.Team
 
 var humanTeam: Team? = null
 var zombieTeam: Team? = null
-var superZombieTeam: Team? = null
 var board: Scoreboard? = null
 
 class Zombies : JavaPlugin() {
@@ -19,7 +18,6 @@ class Zombies : JavaPlugin() {
 
         zombieTeam = board?.registerNewTeam("zombie")
         humanTeam = board?.registerNewTeam("human")
-        superZombieTeam = board?.registerNewTeam("superZombie")
 
         humanTeam?.setCanSeeFriendlyInvisibles(false)
         humanTeam?.setOption(Team.Option.DEATH_MESSAGE_VISIBILITY, Team.OptionStatus.NEVER)
@@ -27,12 +25,8 @@ class Zombies : JavaPlugin() {
         zombieTeam?.setCanSeeFriendlyInvisibles(false)
         zombieTeam?.setOption(Team.Option.DEATH_MESSAGE_VISIBILITY, Team.OptionStatus.NEVER)
         zombieTeam?.color(NamedTextColor.RED)
-        superZombieTeam?.setCanSeeFriendlyInvisibles(false)
-        superZombieTeam?.setOption(Team.Option.DEATH_MESSAGE_VISIBILITY, Team.OptionStatus.NEVER)
-        superZombieTeam?.color(NamedTextColor.RED)
 
         server.pluginManager.registerEvents(EventListener(), this)
-        server.pluginManager.registerEvents(ToSuperZombie(), this)
         getCommand("sethuman")?.also {
             it.setExecutor(SetHuman())
             it.setTabCompleter(PlayerListCommandCompleter())
