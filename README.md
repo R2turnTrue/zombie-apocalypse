@@ -1,4 +1,4 @@
-# Kotlin Paper Tamplate
-Template For PaperMC (Kotlin)
-
-You can use this Template
+# 좀비아포칼립스
+각별 좀비아포칼립스 모방
+## 개발
+제발 브렌치로 나누어서 하고 PR해줘
