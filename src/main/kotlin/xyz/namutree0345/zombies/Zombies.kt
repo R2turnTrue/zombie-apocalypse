@@ -33,6 +33,7 @@ class Zombies : JavaPlugin() {
 
         server.pluginManager.registerEvents(EventListener(), this)
         server.pluginManager.registerEvents(ToSuperZombie(), this)
+        server.pluginManager.registerEvents(DamageListener(), this)
         getCommand("sethuman")?.also {
             it.setExecutor(SetHuman())
             it.setTabCompleter(PlayerListCommandCompleter())
