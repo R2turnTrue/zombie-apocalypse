@@ -27,6 +27,7 @@ class Zombies : JavaPlugin() {
         zombieTeam?.color(NamedTextColor.RED)
 
         server.pluginManager.registerEvents(EventListener(), this)
+        server.pluginManager.registerEvents(DamageListener(), this)
         getCommand("sethuman")?.also {
             it.setExecutor(SetHuman())
             it.setTabCompleter(PlayerListCommandCompleter())
