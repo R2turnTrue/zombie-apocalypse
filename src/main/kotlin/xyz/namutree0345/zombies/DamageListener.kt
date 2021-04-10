@@ -21,7 +21,11 @@ class DamageListener : Listener {
     @EventHandler
     fun damageByZombie(event: EntityDamageByEntityEvent) {
         if(event.damager is Player && event.entity is Player) {
-            if(zombieTeam?.hasEntry(event.damager.name) == true) {
+            if(zombieTeam?.hasEntry(event.damager.name) == true || superZombieTeam?.hasEntry(event.damager.name) == true) {
+                if(zombieTeam?.hasEntry(event.entity.name) == true || superZombieTeam?.hasEntry(event.entity.name) == true) {
+                    event.isCancelled = true
+                    return
+                }
                 (event.entity as Player).addPotionEffect(PotionEffect(PotionEffectType.WITHER, 200, 1, false, false))
             }
         }
