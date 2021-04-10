@@ -22,7 +22,7 @@ class DamageListener : Listener {
     fun damageByZombie(event: EntityDamageByEntityEvent) {
         if(event.damager is Player && event.entity is Player) {
             if(zombieTeam?.hasEntry(event.damager.name) == true) {
-                (event.entity as Player).addPotionEffect(PotionEffect(PotionEffectType.WITHER, 60, 1, false, false))
+                (event.entity as Player).addPotionEffect(PotionEffect(PotionEffectType.WITHER, 200, 1, false, false))
             }
         }
     }
