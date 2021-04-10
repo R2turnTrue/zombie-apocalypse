@@ -11,10 +11,6 @@ class SetHuman : CommandExecutor {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
 
         if(args.isNotEmpty()) {
-            if(Bukkit.getPlayer(args[0])?.isOnline == true) {
-                sender.sendMessage(Component.text("해당 플레이어는 온라인이 아닙니다.", NamedTextColor.RED))
-                return true
-            }
             if (sender.isOp && zombieTeam?.hasEntry(args[0]) == false) {
                 zombieTeam?.removeEntry(args[0])
                 humanTeam?.addEntry(args[0])
