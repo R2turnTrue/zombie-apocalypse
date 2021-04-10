@@ -12,7 +12,7 @@ import org.bukkit.potion.PotionEffectType
 class DamageListener : Listener {
     @EventHandler
     fun damage(event: EntityDamageEvent) {
-        if(event.entityType == EntityType.PLAYER && event.cause == EntityDamageEvent.DamageCause.FALL) {
+        if(event.entityType == EntityType.PLAYER && event.cause == EntityDamageEvent.DamageCause.FALL && humanTeam?.hasEntry(event.entity.name) == true) {
             event.damage = 0.0
             (event.entity as Player).addPotionEffect(PotionEffect(PotionEffectType.SLOW, 60, 1, false, false))
         }
