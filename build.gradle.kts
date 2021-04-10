@@ -24,7 +24,7 @@ dependencies {
 }
 
 spigot {
-    authors = listOf("명이")
+    authors = listOf("NamuTree0345")
     apiVersion = project.property("apiVersion").toString()
     //depends = listOf("ProtocolLib")
     commands {
