@@ -14,13 +14,16 @@ class ToSuperZombie : Listener {
             if(humanTeam?.hasEntry(event.entity.name) == true) {
                 humanTeam?.removeEntry(event.entity.name)
                 superZombieTeam?.addEntry(event.entity.name)
-                player.sendTitle(
-                    "${ChatColor.RED}생존자 사망",
-                    "${ChatColor.RED}${event.entity.name}님이 슈퍼 좀비가 되었습니다!",
-                    10,
-                    70,
-                    20
-                )
+                for (player in Bukkit.getOnlinePlayers()) {
+                    player.sendTitle(
+                        "${ChatColor.RED}생존자 사망",
+                        "${ChatColor.RED}${event.entity.name}님이 슈퍼 좀비가 되었습니다!",
+                        10,
+                        70,
+                        20
+                    )
+                }
+
             }
         }
     }
