@@ -73,7 +73,7 @@ class SuperZombieAbility : Listener {
                                 if(summonCooltime.contains(event.player)) {
                                     summonCooltime.remove(event.player)
                                 }
-                            }, 20 * 10)
+                            }, 20 * 60 * 5)
                         }
                     }, 20 * 3)
                 }
