@@ -15,7 +15,7 @@ class VaccineFeature : Listener {
 
     @EventHandler
     fun onShotArrowByEntity(event: FireworkExplodeEvent) {
-        if(event.entity.name == PlainComponentSerializer.plain().serialize(Component.text("백신", TextColor.color(0x58A8B4), TextDecoration.BOLD, TextDecoration.ITALIC))) {
+        if(event.entity.fireworkMeta.displayName() == Component.text("백신", TextColor.color(0x58A8B4), TextDecoration.BOLD, TextDecoration.ITALIC)) {
             val entities = event.entity.getNearbyEntities(10.0, 10.0, 10.0)
             val playersList = arrayListOf<String>()
             for(e in entities) {
