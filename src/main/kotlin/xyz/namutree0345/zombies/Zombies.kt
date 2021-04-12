@@ -4,11 +4,11 @@ import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.format.TextColor
 import net.kyori.adventure.text.format.TextDecoration
-import org.bukkit.Bukkit
-import org.bukkit.Material
-import org.bukkit.NamespacedKey
+import org.bukkit.*
+import org.bukkit.entity.Firework
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.ShapedRecipe
+import org.bukkit.inventory.meta.FireworkMeta
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.scoreboard.Scoreboard
 import org.bukkit.scoreboard.Team
@@ -59,7 +59,13 @@ class Zombies : JavaPlugin() {
         }
 
         vaccine = ItemStack(Material.FIREWORK_ROCKET).also {
-            it.itemMeta = it.itemMeta.let { it2 ->
+            it.itemMeta = (it.itemMeta as FireworkMeta).let { it2 ->
+                val builder = FireworkEffect.builder()
+                builder.withTrail().withFlicker().withFade(
+                    Color.GREEN, Color.WHITE, Color.YELLOW, Color.BLUE,
+                    Color.FUCHSIA, Color.PURPLE, Color.MAROON, Color.LIME, Color.ORANGE)
+                    .with(FireworkEffect.Type.BALL_LARGE).withColor(Color.AQUA);
+                it2.addEffect(builder.build())
                 it2.displayName(Component.text("백신", TextColor.color(0x58A8B4), TextDecoration.BOLD, TextDecoration.ITALIC))
                 it2
             }
