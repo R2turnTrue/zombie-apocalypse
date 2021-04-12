@@ -20,6 +20,7 @@ dependencies {
     compileOnly("com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT")
     compileOnly("com.github.spigradle.spigradle:kr.entree.spigradle.base.gradle.plugin:v2.2.3")
     compileOnly(paper("1.16.5"))
+    implementation("com.github.NamuTree0345:firework:0.2.1")
     //compileOnly("com.comphenix.protocol:ProtocolLib:4.6.0")
 }
 

@@ -12,6 +12,13 @@ import org.bukkit.inventory.ShapedRecipe
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.scoreboard.Scoreboard
 import org.bukkit.scoreboard.Team
+import xyz.namutree0345.firework.tabCompleter.PlayerListTabCompleter
+import xyz.namutree0345.zombies.command.SetHuman
+import xyz.namutree0345.zombies.feature.SuperZombieAbility
+import xyz.namutree0345.zombies.feature.ToSuperZombie
+import xyz.namutree0345.zombies.feature.VaccineFeature
+import xyz.namutree0345.zombies.listener.DamageListener
+import xyz.namutree0345.zombies.listener.EventListener
 
 
 var humanTeam: Team? = null
@@ -44,10 +51,11 @@ class Zombies : JavaPlugin() {
         server.pluginManager.registerEvents(EventListener(), this)
         server.pluginManager.registerEvents(ToSuperZombie(), this)
         server.pluginManager.registerEvents(DamageListener(), this)
+        server.pluginManager.registerEvents(VaccineFeature(), this)
         server.pluginManager.registerEvents(SuperZombieAbility(), this)
         getCommand("sethuman")?.also {
             it.setExecutor(SetHuman())
-            it.setTabCompleter(PlayerListCommandCompleter())
+            it.tabCompleter = PlayerListTabCompleter()
         }
 
         vaccine = ItemStack(Material.FIREWORK_ROCKET).also {
