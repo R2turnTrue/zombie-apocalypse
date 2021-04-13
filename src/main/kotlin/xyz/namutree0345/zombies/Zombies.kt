@@ -15,6 +15,7 @@ import org.bukkit.scoreboard.Scoreboard
 import org.bukkit.scoreboard.Team
 import xyz.namutree0345.firework.tabCompleter.PlayerListTabCompleter
 import xyz.namutree0345.zombies.command.SetHuman
+import xyz.namutree0345.zombies.command.StartParming
 import xyz.namutree0345.zombies.feature.SuperZombieAbility
 import xyz.namutree0345.zombies.feature.ToSuperZombie
 import xyz.namutree0345.zombies.feature.VaccineFeature
@@ -58,6 +59,9 @@ class Zombies : JavaPlugin() {
         getCommand("sethuman")?.also {
             it.setExecutor(SetHuman())
             it.tabCompleter = PlayerListTabCompleter()
+        }
+        getCommand("startparming")?.also {
+            it.setExecutor(StartParming())
         }
 
         noczep = ItemStack(Material.SUSPICIOUS_STEW).also {
