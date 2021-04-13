@@ -1,8 +1,7 @@
-package xyz.namutree0345.zombies
+package xyz.namutree0345.zombies.feature
 
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
-import net.md_5.bungee.api.ChatMessageType
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
@@ -10,6 +9,9 @@ import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerMoveEvent
 import org.bukkit.event.player.PlayerToggleSneakEvent
 import org.bukkit.plugin.java.JavaPlugin
+import xyz.namutree0345.zombies.Zombies
+import xyz.namutree0345.zombies.superZombieTeam
+import xyz.namutree0345.zombies.zombieTeam
 
 val summonTicks: HashMap<Player, Int> = HashMap()
 val summonWaitingTicks: HashMap<Player, Int> = HashMap()
@@ -71,7 +73,7 @@ class SuperZombieAbility : Listener {
                                 if(summonCooltime.contains(event.player)) {
                                     summonCooltime.remove(event.player)
                                 }
-                            }, 20 * 10)
+                            }, 20 * 60 * 5)
                         }
                     }, 20 * 3)
                 }

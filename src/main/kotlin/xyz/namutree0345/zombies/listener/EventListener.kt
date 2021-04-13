@@ -1,6 +1,7 @@
-package xyz.namutree0345.zombies
+package xyz.namutree0345.zombies.listener
 
 import org.bukkit.Bukkit
+import org.bukkit.Location
 import org.bukkit.entity.*
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -9,6 +10,8 @@ import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
+import xyz.namutree0345.zombies.*
+import xyz.namutree0345.zombies.feature.floatingItemPool
 
 class EventListener : Listener {
 
@@ -21,6 +24,9 @@ class EventListener : Listener {
             if(humanTeam?.hasEntry(event.player.name) == false) {
                 event.player.addPotionEffect(PotionEffect(PotionEffectType.POISON, 5, 0, false, false))
                 event.player.addPotionEffect(PotionEffect(PotionEffectType.NIGHT_VISION, 5, 255, false, false))
+            }
+            if(superZombieTeam?.hasEntry(event.player.name) == true) {
+                floatingItemPool[event.player]?.teleport(Location(event.player.world, event.player.location.x, event.player.location.y + 3, event.player.location.z))
             }
         }, 0, 1)
         Bukkit.getScheduler().scheduleSyncRepeatingTask(JavaPlugin.getPlugin(Zombies::class.java), {

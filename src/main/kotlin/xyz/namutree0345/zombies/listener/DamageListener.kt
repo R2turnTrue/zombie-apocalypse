@@ -1,4 +1,4 @@
-package xyz.namutree0345.zombies
+package xyz.namutree0345.zombies.listener
 
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.Player
@@ -8,6 +8,8 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.bukkit.event.entity.EntityDamageEvent
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
+import xyz.namutree0345.zombies.superZombieTeam
+import xyz.namutree0345.zombies.zombieTeam
 
 class DamageListener : Listener {
     @EventHandler
