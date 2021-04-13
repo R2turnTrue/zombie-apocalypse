@@ -41,7 +41,7 @@ class DamageListener : Listener {
                     event.isCancelled = true
                     return
                 }
-                (event.entity as Player).addPotionEffect(PotionEffect(PotionEffectType.WITHER, 200, 1, false, false))
+                (event.entity as Player).addPotionEffect(PotionEffect(PotionEffectType.WITHER, 20 * 5, 1, false, false))
             }
         }
     }
