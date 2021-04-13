@@ -1,15 +1,19 @@
 package xyz.namutree0345.zombies.feature
 
 import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.format.TextColor
 import net.kyori.adventure.text.format.TextDecoration
 import net.kyori.adventure.text.serializer.plain.PlainComponentSerializer
 import org.bukkit.Bukkit
+import org.bukkit.ChatColor
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.FireworkExplodeEvent
 import xyz.namutree0345.zombies.humanTeam
+import xyz.namutree0345.zombies.superZombieTeam
+import xyz.namutree0345.zombies.zombieTeam
 
 class VaccineFeature : Listener {
 
@@ -25,7 +29,19 @@ class VaccineFeature : Listener {
                     }
                 }
             }
-            Bukkit.broadcastMessage("ah")
+
+            for(plr in playersList) {
+                if(superZombieTeam?.hasEntry(plr) == true) {
+                    superZombieTeam?.removeEntry(plr)
+                }
+                if(zombieTeam?.hasEntry(plr) == true) {
+                    zombieTeam?.removeEntry(plr)
+                }
+                humanTeam?.addEntry(plr)
+                for (player in Bukkit.getOnlinePlayers()) {
+                    player.sendMessage(Component.text("${plr}님이 해방되었습니다!", NamedTextColor.GREEN))
+                }
+            }
         }
     }
 
