@@ -9,6 +9,7 @@ import org.bukkit.entity.Firework
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.ShapedRecipe
 import org.bukkit.inventory.meta.FireworkMeta
+import org.bukkit.inventory.meta.ItemMeta
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.scoreboard.Scoreboard
 import org.bukkit.scoreboard.Team
@@ -27,6 +28,7 @@ var superZombieTeam: Team? = null
 var board: Scoreboard? = null
 
 var vaccine: ItemStack? = null
+var noczep: ItemStack? = null
 
 class Zombies : JavaPlugin() {
 
@@ -58,6 +60,13 @@ class Zombies : JavaPlugin() {
             it.tabCompleter = PlayerListTabCompleter()
         }
 
+        noczep = ItemStack(Material.SUSPICIOUS_STEW).also {
+            it.itemMeta = it.itemMeta.let { it2 ->
+                it2.displayName(Component.text("녹즙", NamedTextColor.DARK_GREEN, TextDecoration.BOLD, TextDecoration.ITALIC))
+                it2
+            }
+        }
+
         vaccine = ItemStack(Material.FIREWORK_ROCKET).also {
             it.itemMeta = (it.itemMeta as FireworkMeta).let { it2 ->
                 val builder = FireworkEffect.builder()
@@ -71,6 +80,14 @@ class Zombies : JavaPlugin() {
             }
         }
 
+        val noczepRecipe = ShapedRecipe(NamespacedKey(getPlugin(Zombies::class.java), "noczep_recipe"), noczep!!)
+        noczepRecipe.shape( "A  ",
+                                    "B  ",
+                                    "C  ")
+        noczepRecipe.setIngredient('A', Material.OAK_SAPLING)
+        noczepRecipe.setIngredient('B', Material.SPRUCE_SAPLING)
+        noczepRecipe.setIngredient('C', Material.DARK_OAK_SAPLING)
+
         val vaccineRecipe = ShapedRecipe(NamespacedKey(getPlugin(Zombies::class.java), "vaccine_recipe"), vaccine!!)
         vaccineRecipe.shape(" # ",
                                     "GBO",
@@ -79,8 +96,9 @@ class Zombies : JavaPlugin() {
         vaccineRecipe.setIngredient('G', Material.GOLDEN_CARROT)
         vaccineRecipe.setIngredient('B', Material.GLASS_BOTTLE)
         vaccineRecipe.setIngredient('O', Material.GOLDEN_APPLE)
-        vaccineRecipe.setIngredient('S', Material.OAK_SAPLING)
+        vaccineRecipe.setIngredient('S', noczep!!)
 
+        server.addRecipe(noczepRecipe)
         server.addRecipe(vaccineRecipe)
     }
 
