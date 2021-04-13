@@ -4,6 +4,7 @@ import com.destroystokyo.paper.event.player.PlayerArmorChangeEvent
 import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.Material
+import org.bukkit.block.Container
 import org.bukkit.entity.*
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -74,7 +75,7 @@ class EventListener : Listener {
     @EventHandler
     fun enchant(event: PlayerInteractEvent) {
         if(zombieTeam?.hasEntry(event.player.name) == true || superZombieTeam?.hasEntry(event.player.name) == true) {
-            if (event.hasBlock() && (event.clickedBlock?.type == Material.ANVIL || event.clickedBlock?.type == Material.ENCHANTING_TABLE || event.clickedBlock?.type == Material.CHEST || event.clickedBlock?.type == Material.HOPPER || event.clickedBlock?.type == Material.ENDER_CHEST || event.clickedBlock?.type == Material.BARREL)) {
+            if (event.hasBlock() && (event.clickedBlock?.type == Material.ANVIL || event.clickedBlock?.type == Material.ENCHANTING_TABLE || event.clickedBlock is Container)) {
                 event.isCancelled = true
             }
         }
