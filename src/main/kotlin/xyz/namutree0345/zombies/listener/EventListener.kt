@@ -14,10 +14,7 @@ import org.bukkit.event.entity.ExplosionPrimeEvent
 import org.bukkit.event.inventory.CraftItemEvent
 import org.bukkit.event.inventory.InventoryMoveItemEvent
 import org.bukkit.event.inventory.InventoryType
-import org.bukkit.event.player.PlayerAttemptPickupItemEvent
-import org.bukkit.event.player.PlayerInteractAtEntityEvent
-import org.bukkit.event.player.PlayerInteractEvent
-import org.bukkit.event.player.PlayerJoinEvent
+import org.bukkit.event.player.*
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
@@ -63,6 +60,15 @@ class EventListener : Listener {
     @EventHandler
     fun chat(event: io.papermc.paper.event.player.AsyncChatEvent) {
         event.isCancelled = true
+    }
+
+    @EventHandler
+    fun oncommand(event: PlayerCommandPreprocessEvent) {
+        if(!event.player.isOp) {
+            if (event.message.equals("/w", true) || event.message.equals("/me", true)) {
+                event.isCancelled = true;
+            }
+        }
     }
 
     @EventHandler
