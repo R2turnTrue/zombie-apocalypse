@@ -1,11 +1,16 @@
 package xyz.namutree0345.zombies.listener
 
+import com.destroystokyo.paper.event.player.PlayerArmorChangeEvent
+import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
 import org.bukkit.Location
+import org.bukkit.Material
 import org.bukkit.entity.*
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.EntityTargetEvent
+import org.bukkit.event.inventory.CraftItemEvent
+import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.potion.PotionEffect
@@ -42,6 +47,72 @@ class EventListener : Listener {
             if(event.target is Player) {
                 if(zombieTeam?.hasEntry(event.target?.name!!) == true || superZombieTeam?.hasEntry(event.target?.name!!) == true) {
                     event.isCancelled = true
+                }
+            }
+        }
+    }
+
+    @EventHandler
+    fun chat(event: io.papermc.paper.event.player.AsyncChatEvent) {
+        event.isCancelled = true
+    }
+
+    @EventHandler
+    fun enchant(event: PlayerInteractEvent) {
+        if(event.hasBlock() && (event.clickedBlock?.type == Material.ANVIL || event.clickedBlock?.type == Material.ENCHANTING_TABLE)) {
+            event.isCancelled = true
+        }
+    }
+
+    @EventHandler
+    fun onEquip(event: PlayerArmorChangeEvent) {
+        if(zombieTeam?.hasEntry(event.player.name) == true && superZombieTeam?.hasEntry(event.player.name) == true) {
+            val disabledItems = listOf<Material>(
+                Material.DIAMOND_HELMET,
+                Material.DIAMOND_CHESTPLATE,
+                Material.DIAMOND_LEGGINGS,
+                Material.DIAMOND_BOOTS,
+                Material.NETHERITE_HELMET,
+                Material.NETHERITE_CHESTPLATE,
+                Material.NETHERITE_LEGGINGS,
+                Material.NETHERITE_BOOTS
+            )
+            for (t in disabledItems) {
+                if (event.newItem?.type == t) {
+                    event.player.inventory.remove(event.newItem!!)
+                    break
+                }
+            }
+        }
+    }
+
+    @EventHandler
+    fun onCraft(event: CraftItemEvent) {
+        if(zombieTeam?.hasEntry(event.whoClicked.name) == true || superZombieTeam?.hasEntry(event.whoClicked.name) == true) {
+            val disabledItems = listOf<Material>(
+                Material.ENCHANTING_TABLE,
+                Material.ANVIL,
+                Material.DIAMOND_SWORD,
+                Material.DIAMOND_AXE,
+                Material.DIAMOND_SHOVEL,
+                Material.DIAMOND_HOE,
+                Material.DIAMOND_HELMET,
+                Material.DIAMOND_CHESTPLATE,
+                Material.DIAMOND_LEGGINGS,
+                Material.DIAMOND_BOOTS,
+                Material.NETHERITE_SWORD,
+                Material.NETHERITE_AXE,
+                Material.NETHERITE_SHOVEL,
+                Material.NETHERITE_HOE,
+                Material.NETHERITE_HELMET,
+                Material.NETHERITE_CHESTPLATE,
+                Material.NETHERITE_LEGGINGS,
+                Material.NETHERITE_BOOTS
+            )
+            for (t in disabledItems) {
+                if (event.recipe.result.type == t) {
+                    event.isCancelled = true
+                    return
                 }
             }
         }
