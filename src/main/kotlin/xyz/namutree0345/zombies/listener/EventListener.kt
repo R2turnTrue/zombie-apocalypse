@@ -27,7 +27,9 @@ class EventListener : Listener {
     @EventHandler
     fun join(event: PlayerJoinEvent) {
         event.player.scoreboard = board!!
-        zombieTeam?.addEntry(event.player.name)
+        if(humanTeam?.hasEntry(event.player.name) == false || superZombieTeam?.hasEntry(event.player.name) == false) {
+            zombieTeam?.addEntry(event.player.name)
+        }
 
         val taskId = Bukkit.getScheduler().scheduleSyncRepeatingTask(JavaPlugin.getPlugin(Zombies::class.java), {
             if(humanTeam?.hasEntry(event.player.name) == false) {
