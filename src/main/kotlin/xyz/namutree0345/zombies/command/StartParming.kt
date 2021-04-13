@@ -18,7 +18,7 @@ var mujuk = true
 class StartParming : CommandExecutor {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if(sender.isOp) {
-            val a = getTimeByTick(0, 0, 15)
+            val a = 20 * 60 * 10
             var tmp = a
             val taskId = Bukkit.getScheduler().scheduleSyncRepeatingTask(JavaPlugin.getPlugin(Zombies::class.java), {
                 for (player in Bukkit.getOnlinePlayers()) {
@@ -43,6 +43,4 @@ class StartParming : CommandExecutor {
         }
         return true
     }
-
-    private fun getTimeByTick(hour: Int, minute: Int, second: Int) : Int = (((20 * 60) * 60) * hour) + ((20 * 60) * minute) + (20 * second)
 }
