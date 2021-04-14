@@ -20,6 +20,8 @@ import xyz.namutree0345.zombies.feature.ToSuperZombie
 import xyz.namutree0345.zombies.feature.VaccineFeature
 import xyz.namutree0345.zombies.listener.DamageListener
 import xyz.namutree0345.zombies.listener.EventListener
+import java.util.*
+import kotlin.collections.HashMap
 
 
 var humanTeam: Team? = null
@@ -29,6 +31,8 @@ var board: Scoreboard? = null
 
 var vaccine: ItemStack? = null
 var noczep: ItemStack? = null
+
+val teams = HashMap<UUID, String>()
 
 class Zombies : JavaPlugin() {
 

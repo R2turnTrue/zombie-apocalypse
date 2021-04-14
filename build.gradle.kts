@@ -30,6 +30,9 @@ spigot {
     //depends = listOf("ProtocolLib")
     commands {
         create("sethuman")
+        create("setzombie")
+        create("setsuperzombie")
+        create("forcereleasemujuk")
         create("startparming")
     }
 }
