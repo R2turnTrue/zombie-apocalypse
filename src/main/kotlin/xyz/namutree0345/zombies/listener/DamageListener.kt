@@ -2,6 +2,7 @@ package xyz.namutree0345.zombies.listener
 
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.Player
+import org.bukkit.entity.Projectile
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.EntityDamageByEntityEvent
@@ -35,6 +36,13 @@ class DamageListener : Listener {
             return
         }
 
+        if(event.damager is Projectile && event.entity is Player) {
+            if((event.damager as Projectile).shooter is Player) {
+                if (zombieTeam?.hasEntry(((event.damager as Projectile).shooter as Player).name) == true || superZombieTeam?.hasEntry(((event.damager as Projectile).shooter as Player).name) == true) {
+                    event.damage = event.damage - (event.damage / 3)
+                }
+            }
+        }
         if(event.damager is Player && event.entity is Player) {
             if(zombieTeam?.hasEntry(event.damager.name) == true || superZombieTeam?.hasEntry(event.damager.name) == true) {
                 if(zombieTeam?.hasEntry(event.entity.name) == true || superZombieTeam?.hasEntry(event.entity.name) == true) {

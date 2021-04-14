@@ -39,7 +39,7 @@ class StartParming : CommandExecutor {
                 }
                 mujuk = false
                 tmp--
-            }, 1L)
+            }, 20 * 60 * 10)
         }
         return true
     }

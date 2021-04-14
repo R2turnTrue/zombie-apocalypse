@@ -66,7 +66,7 @@ class EventListener : Listener {
     @EventHandler
     fun oncommand(event: PlayerCommandPreprocessEvent) {
         if(!event.player.isOp) {
-            if (event.message.equals("/w", true) || event.message.equals("/me", true)) {
+            if (event.message.startsWith("/w", true) || event.message.startsWith("/tell", true)) {
                 event.isCancelled = true;
             }
         }
