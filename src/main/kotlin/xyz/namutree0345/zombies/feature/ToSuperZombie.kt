@@ -8,6 +8,7 @@ import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.PlayerDeathEvent
+import org.bukkit.inventory.ItemStack
 import xyz.namutree0345.firework.entity.FloatingItem
 import xyz.namutree0345.zombies.humanTeam
 import xyz.namutree0345.zombies.superZombieTeam
@@ -18,13 +19,23 @@ class ToSuperZombie : Listener {
 
     @EventHandler
     fun died(event: PlayerDeathEvent) {
+        if(humanTeam?.hasEntry(event.entity.name) == false && humanTeam?.hasEntry(event.entity.killer?.name!!) == true) {
+            event.entity.world.dropItem(event.entity.location, ItemStack(Material.ZOMBIE_HEAD))
+        }
         for (player in Bukkit.getOnlinePlayers()) {
             if(humanTeam?.hasEntry(event.entity.name) == true) {
                 humanTeam?.removeEntry(event.entity.name)
                 superZombieTeam?.addEntry(event.entity.name)
 
                 floatingItemPool[event.entity] = FloatingItem(Material.REDSTONE_BLOCK)
-                floatingItemPool[event.entity]?.spawn(Location(event.entity.world, event.entity.location.x, event.entity.location.y + 3, event.entity.location.z))
+                floatingItemPool[event.entity]?.spawn(
+                    Location(
+                        event.entity.world,
+                        event.entity.location.x,
+                        event.entity.location.y + 3,
+                        event.entity.location.z
+                    )
+                )
 
                 for (player in Bukkit.getOnlinePlayers()) {
                     player.sendTitle(
@@ -35,7 +46,6 @@ class ToSuperZombie : Listener {
                         20
                     )
                 }
-
             }
         }
     }

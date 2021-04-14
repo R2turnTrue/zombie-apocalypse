@@ -25,7 +25,9 @@ class VaccineFeature : Listener {
             for(e in entities) {
                 if(e is Player) {
                     if(humanTeam?.hasEntry(e.name) == false) {
-                        playersList.add(e.name)
+                        if(e.name != (event.entity.shooter as Player).name) {
+                            playersList.add(e.name)
+                        }
                     }
                 }
             }

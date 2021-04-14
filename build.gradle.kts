@@ -30,6 +30,7 @@ spigot {
     //depends = listOf("ProtocolLib")
     commands {
         create("sethuman")
+        create("startparming")
     }
 }
 
