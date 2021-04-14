@@ -27,15 +27,14 @@ class EventListener : Listener {
     @EventHandler
     fun join(event: PlayerJoinEvent) {
         event.player.scoreboard = board!!
-        if(humanTeam?.hasEntry(event.player.name) == false || superZombieTeam?.hasEntry(event.player.name) == false) {
-            zombieTeam?.addEntry(event.player.name)
-        }
+        zombieTeam?.addEntry(event.player.name)
 
         val taskId = Bukkit.getScheduler().scheduleSyncRepeatingTask(JavaPlugin.getPlugin(Zombies::class.java), {
             if(humanTeam?.hasEntry(event.player.name) == false) {
                 event.player.addPotionEffect(PotionEffect(PotionEffectType.POISON, 5, 0, false, false))
                 event.player.addPotionEffect(PotionEffect(PotionEffectType.NIGHT_VISION, 40, 255, false, false))
                 event.player.addPotionEffect(PotionEffect(PotionEffectType.SATURATION, 5, 255, false, false))
+
             }
             if(superZombieTeam?.hasEntry(event.player.name) == true) {
                 floatingItemPool[event.player]?.teleport(Location(event.player.world, event.player.location.x, event.player.location.y + 3, event.player.location.z))

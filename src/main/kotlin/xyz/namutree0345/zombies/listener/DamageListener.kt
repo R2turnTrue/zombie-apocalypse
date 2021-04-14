@@ -23,7 +23,7 @@ class DamageListener : Listener {
 
         if(event.entityType == EntityType.PLAYER && event.cause == EntityDamageEvent.DamageCause.FALL) {
             event.damage = 0.0
-            (event.entity as Player).addPotionEffect(PotionEffect(PotionEffectType.SLOW, 40, 5, false, false))
+            (event.entity as Player).addPotionEffect(PotionEffect(PotionEffectType.SLOW, 20, 5, false, false))
         }
     }
 
@@ -40,8 +40,9 @@ class DamageListener : Listener {
                 if(zombieTeam?.hasEntry(event.entity.name) == true || superZombieTeam?.hasEntry(event.entity.name) == true) {
                     event.isCancelled = true
                     return
+                } else {
+                    event.damage = event.damage - (event.damage / 3)
                 }
-                (event.entity as Player).addPotionEffect(PotionEffect(PotionEffectType.WITHER, 20 * 5, 1, false, false))
             }
         }
     }
