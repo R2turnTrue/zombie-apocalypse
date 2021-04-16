@@ -20,6 +20,7 @@ import xyz.namutree0345.zombies.feature.ToSuperZombie
 import xyz.namutree0345.zombies.feature.VaccineFeature
 import xyz.namutree0345.zombies.listener.DamageListener
 import xyz.namutree0345.zombies.listener.EventListener
+import xyz.namutree0345.zombies.listener.RemovePlayerFromPlayerList
 import java.util.*
 import kotlin.collections.HashMap
 
@@ -55,6 +56,7 @@ class Zombies : JavaPlugin() {
         superZombieTeam?.color(NamedTextColor.RED)
 
         server.pluginManager.registerEvents(EventListener(), this)
+        server.pluginManager.registerEvents(RemovePlayerFromPlayerList(), this)
         server.pluginManager.registerEvents(ToSuperZombie(), this)
         server.pluginManager.registerEvents(DamageListener(), this)
         server.pluginManager.registerEvents(VaccineFeature(), this)
